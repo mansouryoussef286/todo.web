@@ -1,0 +1,14 @@
+<!-- todo.component.html -->
+
+<div>
+	<h1>Todo List</h1>
+
+	<app-task-item *ngFor="let item of todoList"></app-task-item>
+
+	<!-- Add Item Form -->
+	<div class="add-item-form">
+		<input type="text" placeholder="Title" [(ngModel)]="newItem.title" />
+		<textarea placeholder="Description" [(ngModel)]="newItem.description"></textarea>
+		<button (click)="addItem()">Add Item</button>
+	</div>
+</div>
