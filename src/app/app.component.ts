@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { RoutePaths } from './Common/Settings/RoutePaths';
 
 @Component({
 	selector: 'app-root',
@@ -9,5 +10,9 @@ import { Router } from '@angular/router';
 
 export class AppComponent {
 	title = 'Todo';
-	constructor(protected router: Router) { }
+	constructor(protected Router: Router) { }
+
+	GoToLogin() {
+		this.Router.navigateByUrl(RoutePaths.Login)
+	}
 }

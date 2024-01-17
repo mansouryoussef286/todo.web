@@ -15,6 +15,8 @@ export class AuthenticationService {
 	}
 
 	GetAuthenticationUrl() {
+		// use dotenv to store values from 
+		// https://medium.com/@desinaoluseun/using-env-to-store-environment-variables-in-angular-20c15c7c0e6a
 		let response_type = 'code';
 		let client_id = '7AtMgepqMwqvlgtKhV2vQy7YmWYCr3oI';
 		let scope = 'openid profile email';
@@ -24,12 +26,9 @@ export class AuthenticationService {
 		return `${this.TenantBaseUrl}authorize?response_type=${response_type}&client_id=${client_id}&scope=${scope}&redirect_uri=${redirect_uri}&state=${state}`;
 	}
 
-	GetAccessToken(response: LoginModels.AutheticationResponse) {
+	GetAccessToken(code: string) {
 		// check state then get access token
-		this.HttpService.Get<any>(HttpEndPoints.Account.Authenticate + '/' + response.code).subscribe((data) => {
-			console.log(data);
-			// extract the access token and save it for fetching data
-		});
+		return this.HttpService.Get<any>(HttpEndPoints.Account.Authenticate + '/' + code)
 	}
 
 	Logout() {
