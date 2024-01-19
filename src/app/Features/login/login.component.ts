@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { AuthenticationService } from '@App/Common/Services/Authentication.Service';
 
 @Component({
@@ -8,8 +9,17 @@ import { AuthenticationService } from '@App/Common/Services/Authentication.Servi
 	templateUrl: './login.component.html',
 	styleUrl: './login.component.scss'
 })
-export class LoginComponent {
-	constructor(private AuthenticationService: AuthenticationService) { }
+export class LoginComponent implements OnInit {
+	constructor(
+		private AuthenticationService: AuthenticationService,
+		private ActivatedRoute: ActivatedRoute
+	) { }
+
+	async ngOnInit() {
+		this.ActivatedRoute.queryParams.subscribe((queryParams: any) => {
+			this.AuthenticationService.ReturnUrl = queryParams['returnUrl'] ?? '';
+		});
+	}
 
 	authenticate() {
 		this.AuthenticationService.Authenticate();
