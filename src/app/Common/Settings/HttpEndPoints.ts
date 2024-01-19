@@ -5,4 +5,8 @@ export class HttpEndPoints {
 		Authenticate: 'authentication',
 		Refresh: 'authentication/refresh',
 	}
+
+	public static Tasks = {
+		GetAll: 'tasks/list'
+	}
 }

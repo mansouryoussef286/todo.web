@@ -4,6 +4,11 @@
 	flex-direction: column;
 	justify-content: space-between;
 	align-items: center;
+
+	.tasks-content {
+		flex-grow: 1;
+	}
+
 	.todo-item {
 		margin-bottom: 10px;
 	}

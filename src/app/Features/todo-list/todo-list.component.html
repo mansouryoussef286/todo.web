@@ -1,6 +1,13 @@
 <div class="todo-list">
 	<h1>Todo List</h1>
-	<app-task-item *ngFor="let item of todoList" [TaskItem]="item"></app-task-item>
+	<div class="tasks-content">
+		<div *ngIf="!IsLoaded">
+			<app-loader></app-loader>
+		</div>
+		<div *ngIf="IsLoaded">
+			<app-task-item *ngFor="let item of todoList" [TaskItem]="item"></app-task-item>
+		</div>
+	</div>
 
 	<!-- Add Item Form -->
 	<div class="add-item-form">
