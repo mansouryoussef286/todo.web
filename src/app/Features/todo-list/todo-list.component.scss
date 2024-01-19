@@ -1,22 +1,27 @@
-/* todo.component.css */
+.todo-list {
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: center;
+	.todo-item {
+		margin-bottom: 10px;
+	}
 
-.todo-item {
-	margin-bottom: 10px;
-}
+	.item-title {
+		margin-left: 10px;
+	}
 
-.item-title {
-	margin-left: 10px;
-}
+	.item-description {
+		margin-left: 30px;
+	}
 
-.item-description {
-	margin-left: 30px;
-}
+	.add-item-form {
+		margin-top: 20px;
+	}
 
-.add-item-form {
-	margin-top: 20px;
-}
-
-.add-item-form input,
-.add-item-form textarea {
-	margin-bottom: 10px;
+	.add-item-form input,
+	.add-item-form textarea {
+		margin-bottom: 10px;
+	}
 }

@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { TaskItem } from '@App/Common/Models/TaskItem.Model';
+import { Component, Input } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 @Component({
@@ -9,7 +10,5 @@ import { FormsModule } from '@angular/forms';
 	styleUrl: './task-item.component.scss'
 })
 export class TaskItemComponent {
-	item: any =
-		{ title: 'Example Task 1', description: 'Description for task 1', completed: false };
-
+	@Input('TaskItem') item!: TaskItem;
 }
