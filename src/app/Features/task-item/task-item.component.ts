@@ -10,5 +10,5 @@ import { FormsModule } from '@angular/forms';
 	styleUrl: './task-item.component.scss'
 })
 export class TaskItemComponent {
-	@Input('TaskItem') item!: TaskItem;
+	@Input('TaskItem') item!: TaskItem.Model;
 }

@@ -7,6 +7,7 @@ export class HttpEndPoints {
 	}
 
 	public static Tasks = {
-		GetAll: 'tasks/list'
+		GetAll: 'todotasks/list',
+		Create: 'todotasks',
 	}
 }

@@ -15,20 +15,10 @@ import { LoaderComponent } from '@App/Common/Widgets/Loader/Loader';
 	styleUrl: './todo-list.component.scss'
 })
 export class TodoListComponent implements OnInit {
-	todoList: TaskItem[] = [
-		{ Id: 1, title: 'Example Task 1', description: 'Description for task 1', completed: false, CreatedAt: new Date(), UpdatedAt: new Date() },
-		{ Id: 2, title: 'Example Task 2', description: 'Description for task 2', completed: false, CreatedAt: new Date(), UpdatedAt: new Date() }
-	];
-
-	newItem: TaskItem = {
-		Id: 0,
-		title: '',
-		description: '',
-		completed: false,
-		CreatedAt: new Date(),
-		UpdatedAt: new Date()
-	};
+	todoList!: TaskItem.Model[];
+	newItem: TaskItem.Model = new TaskItem.Model();
 	IsLoaded: boolean = false;
+	IsAdded: boolean = false;
 
 	constructor(private HttpService: HttpService) { }
 
@@ -37,28 +27,26 @@ export class TodoListComponent implements OnInit {
 	}
 
 	GetTasks() {
-		let endPoint = HttpEndPoints.Tasks.GetAll
-		this.HttpService.Get<TaskItem[]>(endPoint).subscribe(data => {
-			this.IsLoaded = true
-			this.todoList = data
-		})
+		let endPoint = HttpEndPoints.Tasks.GetAll;
+		this.HttpService.Get<TaskItem.Model[]>(endPoint).subscribe(data => {
+			this.IsLoaded = true;
+			this.todoList = data;
+		});
 	}
 
 	addItem() {
-		if (this.newItem.title.trim() !== '') {
-			this.todoList.push({ ...this.newItem, Id: 3 });
-			this.clearNewItem();
-		}
-	}
+		if (this.newItem.title.trim() === '') return;
+		this.IsAdded = false;
 
-	clearNewItem() {
-		this.newItem = {
-			Id: 0,
-			title: '',
-			description: '',
-			completed: false,
-			CreatedAt: new Date(),
-			UpdatedAt: new Date()
-		};
+		const newItem = {
+			title: this.newItem.title,
+			description: this.newItem.description
+		} as TaskItem.Model;
+
+		let endPoint = HttpEndPoints.Tasks.Create;
+		this.HttpService.Post<TaskItem.ReqModel, TaskItem.Model>(endPoint, newItem).subscribe(data => {
+			this.IsAdded = true;
+			this.todoList.push(data);
+		});
 	}
 }
