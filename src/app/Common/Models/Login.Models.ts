@@ -12,6 +12,7 @@ export namespace LoginModels {
     }
 
     export class CurrentUser {
+        UserId!: number;
         FirstName!: string;
         LastName!: string;
         Email!: string;

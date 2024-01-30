@@ -11,4 +11,9 @@ import { FormsModule } from '@angular/forms';
 })
 export class TaskItemComponent {
 	@Input('TaskItem') item!: TaskItem.Model;
+
+	constructor() {
+		console.log(this.item);
+
+	}
 }

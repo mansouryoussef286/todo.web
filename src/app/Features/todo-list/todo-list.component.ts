@@ -6,6 +6,7 @@ import { TaskItem } from '@App/Common/Models/TaskItem.Model';
 import { HttpService } from '@App/Common/Services/Http.Service';
 import { HttpEndPoints } from '@App/Common/Settings/HttpEndPoints';
 import { LoaderComponent } from '@App/Common/Widgets/Loader/Loader';
+import { AuthenticationService } from '@App/Common/Services/Authentication.Service';
 
 @Component({
 	selector: 'app-todo-list',
@@ -18,9 +19,9 @@ export class TodoListComponent implements OnInit {
 	todoList!: TaskItem.Model[];
 	newItem: TaskItem.Model = new TaskItem.Model();
 	IsLoaded: boolean = false;
-	IsAdded: boolean = false;
+	IsAdded: boolean = true;
 
-	constructor(private HttpService: HttpService) { }
+	constructor(private HttpService: HttpService, private AuthenticationService: AuthenticationService) { }
 
 	ngOnInit(): void {
 		this.GetTasks();
@@ -35,18 +36,20 @@ export class TodoListComponent implements OnInit {
 	}
 
 	addItem() {
-		if (this.newItem.title.trim() === '') return;
+		if (this.newItem.Title.trim() === '') return;
 		this.IsAdded = false;
 
 		const newItem = {
-			title: this.newItem.title,
-			description: this.newItem.description
-		} as TaskItem.Model;
+			Title: this.newItem.Title,
+			Description: this.newItem.Description,
+			UserId: this.AuthenticationService.CurrentUser.UserId
+		} as TaskItem.ReqModel;
 
 		let endPoint = HttpEndPoints.Tasks.Create;
 		this.HttpService.Post<TaskItem.ReqModel, TaskItem.Model>(endPoint, newItem).subscribe(data => {
 			this.IsAdded = true;
 			this.todoList.push(data);
+			this.newItem = new TaskItem.Model();
 		});
 	}
 }

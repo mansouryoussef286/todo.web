@@ -1,9 +1,8 @@
 <div class="form-group">
-	<input [id]="'task-item' + item.Id" type="checkbox" [(ngModel)]="item.completed" />
+	<input [id]="'task-item' + item.Id" type="checkbox" [(ngModel)]="item.Status" />
 	<label [for]="'task-item' + item.Id" class="todo-item">
-		<span class="item-title">{{ item.title }}</span>
+		<span class="item-title">{{ item.Title }}</span>
 	</label>
-	<span class="item-date">{{ item.title }}</span>
 
-	<p class="item-description">{{ item.description }}</p>
+	<p class="item-description">{{ item.Description }}</p>
 </div>
