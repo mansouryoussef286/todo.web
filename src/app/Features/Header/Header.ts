@@ -1,3 +1,4 @@
+import { AuthenticationService } from '@App/Common/Services/Authentication.Service';
 import { RoutePaths } from '@App/Common/Settings/RoutePaths';
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
@@ -22,9 +23,9 @@ export class HeaderComponent {
 
 	constructor(
 		private Router: Router,
-		// protected AuthService: AuthService,
+		protected AuthService: AuthenticationService,
 	) {
-		// this.CurrentUser = this.AuthService.CurrentUser
+		this.CurrentUser = this.AuthService.CurrentUser
 	}
 
 	goToProfile() {

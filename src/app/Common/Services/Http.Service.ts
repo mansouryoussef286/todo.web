@@ -5,7 +5,7 @@ import { catchError, throwError } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class HttpService {
-	ApiUrl: string = 'https://localhost:44313/api/';
+	ApiUrl: string = 'https://localhost:7239/api/';
 
 	constructor(private HttpClient: HttpClient) { }
 
