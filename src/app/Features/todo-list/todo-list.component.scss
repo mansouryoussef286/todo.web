@@ -1,32 +1,27 @@
 .todo-list {
-	height: 100%;
-	display: flex;
 	flex-direction: column;
-	justify-content: space-between;
-	align-items: center;
 
 	.tasks-content {
+		padding: 20px;
+		width: 100%;
 		flex-grow: 1;
 	}
 
-	.todo-item {
-		margin-bottom: 10px;
-	}
-
-	.item-title {
-		margin-left: 10px;
-	}
-
-	.item-description {
-		margin-left: 30px;
-	}
-
 	.add-item-form {
-		margin-top: 20px;
-	}
+		padding: 5px 10px;
+		width: 100%;
+		display: flex;
+		justify-content: center;
+		align-items: flex-end;
 
-	.add-item-form input,
-	.add-item-form textarea {
-		margin-bottom: 10px;
+		.text {
+			width: 100%;
+			input {
+				margin-bottom: 10px;
+			}
+		}
+		button {
+			margin-inline-start: 5px;
+		}
 	}
 }

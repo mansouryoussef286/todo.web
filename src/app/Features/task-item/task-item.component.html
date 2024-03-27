@@ -1,8 +1,7 @@
 <div class="form-group">
-	<input [id]="'task-item' + item.Id" type="checkbox" [(ngModel)]="item.Status" />
+	<input [id]="'task-item' + item.Id" type="radio" name="taskStatus" [(ngModel)]="item.Status" [value]="item.Id" />
 	<label [for]="'task-item' + item.Id" class="todo-item">
 		<span class="item-title">{{ item.Title }}</span>
+		<p class="item-description">{{ item.Description }}</p>
 	</label>
-
-	<p class="item-description">{{ item.Description }}</p>
 </div>

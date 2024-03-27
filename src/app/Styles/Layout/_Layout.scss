@@ -11,10 +11,14 @@ body {
 	.page-master {
 		width: 100%;
 		min-height: 100vh;
+		display: flex;
+		flex-direction: column;
+
 		app-header {
 			display: block;
 			height: var(--header-height);
 		}
+
 		.page-inner {
 			animation: initial-transition 0.3s ease-in-out;
 			color: var(--primary-font-color);
@@ -90,8 +94,6 @@ body {
 					}
 					.graphics {
 						opacity: 0.3;
-					}
-					.image {
 					}
 				}
 			}
