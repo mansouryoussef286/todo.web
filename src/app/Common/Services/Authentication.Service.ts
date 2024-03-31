@@ -15,73 +15,6 @@ export class AuthenticationService {
 		private StorageService: StorageService
 	) { }
 
-	HandleAuthentication(response: LoginModels.AutheticationResponse): Promise<boolean> {
-		return new Promise<boolean>((resolve, reject) => {
-			if (this.CheckState(response.state))
-				this.ValidateCode(response.code).subscribe({
-					next: (data: LoginModels.ValidateCodeResponse) => {
-						if (data.Success) {
-							// console.log('validating code response', data);
-							this.HandleAccessToken(data);
-							resolve(true);
-						} else {
-							console.log('success = false');
-							reject();
-						}
-					},
-					error: err => {
-						console.log('validation code error');
-						console.log(err);
-						reject();
-					}
-				})
-			else {
-				console.log('incorrect state');
-				reject();
-			}
-
-		})
-	}
-
-	Authenticate() {
-		let url = this.GetAuthenticationUrl();
-		window.open(url, "_self");
-	}
-
-	private GetAuthenticationUrl(): string {
-		// use dotenv to store values from 
-		// https://medium.com/@desinaoluseun/using-env-to-store-environment-variables-in-angular-20c15c7c0e6a
-		let response_type = 'code';
-		let client_id = '7AtMgepqMwqvlgtKhV2vQy7YmWYCr3oI';
-		let scope = 'openid profile email';
-		let redirect_uri = 'http://localhost:4200/auth';
-		let state = 'STATE';
-
-		this.State = state;
-		return `${this.TenantBaseUrl}authorize?response_type=${response_type}&client_id=${client_id}&scope=${scope}&redirect_uri=${redirect_uri}&state=${state}`;
-	}
-
-	private CheckState(state: string): boolean {
-		return state != this.State;
-	}
-
-	private ValidateCode(code: string): Observable<LoginModels.ValidateCodeResponse> {
-		return this.HttpService.Get<any>(HttpEndPoints.Account.Authenticate + '/' + code)
-	}
-
-	private HandleAccessToken(response: LoginModels.ValidateCodeResponse) {
-		this.StorageService.SetLocalStorage(StorageEnum.AccessToken, response.AccessToken);
-		this.StorageService.SetLocalStorage(StorageEnum.RefreshToken, response.RefreshToken);
-		this.StorageService.SetLocalStorage(StorageEnum.CurrentUser, response.CurrentUser);
-
-	}
-
-	Logout() {
-		this.StorageService.RemoveLocalStorage(StorageEnum.AccessToken);
-		this.StorageService.RemoveLocalStorage(StorageEnum.RefreshToken);
-		this.StorageService.RemoveLocalStorage(StorageEnum.CurrentUser);
-	}
-
 	get AccessToken(): string {
 		let token = this.StorageService.GetLocalStorage<string>(StorageEnum.AccessToken);
 		if (Object.keys(token).length == 0) return '';
@@ -120,9 +53,77 @@ export class AuthenticationService {
 		this.StorageService.SetLocalStorage(StorageEnum.ReturnUrl, value);
 	}
 
+
+	Authenticate() {
+		let url = this.GetAuthenticationUrl();
+		window.open(url, "_self");
+	}
+
+	private GetAuthenticationUrl(): string {
+		// use dotenv to store values from 
+		// https://medium.com/@desinaoluseun/using-env-to-store-environment-variables-in-angular-20c15c7c0e6a
+		let response_type = 'code';
+		let client_id = '7AtMgepqMwqvlgtKhV2vQy7YmWYCr3oI';
+		let scope = 'openid profile email';
+		let redirect_uri = 'http://localhost:4200/auth';
+		let state = 'STATE';
+
+		this.State = state;
+		return `${this.TenantBaseUrl}authorize?response_type=${response_type}&client_id=${client_id}&scope=${scope}&redirect_uri=${redirect_uri}&state=${state}`;
+	}
+
+	HandleAuthentication(response: LoginModels.AutheticationResponse): Promise<boolean> {
+		return new Promise<boolean>((resolve, reject) => {
+			if (this.CheckState(response.state))
+				this.ValidateCode(response.code).subscribe({
+					next: (data: LoginModels.ValidateCodeResponse) => {
+						if (data.Success) {
+							// console.log('validating code response', data);
+							this.HandleSuccessAuthenticationResponse(data);
+							resolve(true);
+						} else {
+							console.log('success = false');
+							reject();
+						}
+					},
+					error: err => {
+						console.log('validation code error');
+						console.log(err);
+						reject();
+					}
+				})
+			else {
+				console.log('incorrect state');
+				reject();
+			}
+
+		})
+	}
+
+	private CheckState(state: string): boolean {
+		return state != this.State;
+	}
+
+	private ValidateCode(code: string): Observable<LoginModels.ValidateCodeResponse> {
+		return this.HttpService.Get<any>(HttpEndPoints.Account.Authenticate + '/' + code)
+	}
+
+	private HandleSuccessAuthenticationResponse(response: LoginModels.ValidateCodeResponse) {
+		this.StorageService.SetLocalStorage(StorageEnum.AccessToken, response.AccessToken);
+		this.StorageService.SetLocalStorage(StorageEnum.RefreshToken, response.RefreshToken);
+		this.StorageService.SetLocalStorage(StorageEnum.CurrentUser, response.CurrentUser);
+
+	}
+
+	Logout() {
+		this.StorageService.RemoveLocalStorage(StorageEnum.AccessToken);
+		this.StorageService.RemoveLocalStorage(StorageEnum.RefreshToken);
+		this.StorageService.RemoveLocalStorage(StorageEnum.CurrentUser);
+	}
+
 	RefreshAccessToken(): any {
 		let requestModel = {
-			Email: this.CurrentUser.Email,
+			UserId: this.CurrentUser.Id,
 			AccessToken: this.AccessToken,
 			RefreshToken: this.RefreshToken
 		} as LoginModels.RefreshTokenReqModel;

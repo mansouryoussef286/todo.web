@@ -12,7 +12,7 @@ export namespace LoginModels {
     }
 
     export class CurrentUser {
-        UserId!: number;
+        Id!: number;
         FirstName!: string;
         LastName!: string;
         Email!: string;
@@ -20,7 +20,7 @@ export namespace LoginModels {
     }
 
     export class RefreshTokenReqModel {
-        Email!: string;
+        UserId!: number;
         AccessToken!: string;
         RefreshToken!: string;
     }

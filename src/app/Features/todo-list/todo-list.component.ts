@@ -42,7 +42,7 @@ export class TodoListComponent implements OnInit {
 		const newItem = {
 			Title: this.newItem.Title,
 			Description: this.newItem.Description,
-			UserId: this.AuthenticationService.CurrentUser.UserId
+			UserId: this.AuthenticationService.CurrentUser.Id
 		} as TaskItem.ReqModel;
 
 		let endPoint = HttpEndPoints.Tasks.Create;

@@ -16,6 +16,7 @@ export class LoginComponent implements OnInit {
 	) { }
 
 	async ngOnInit() {
+		this.AuthenticationService.Logout();
 		this.ActivatedRoute.queryParams.subscribe((queryParams: any) => {
 			this.AuthenticationService.ReturnUrl = queryParams['returnUrl'] ?? '';
 		});
