@@ -2,11 +2,13 @@ import { Injectable } from '@angular/core';
 import { HttpService } from './Http.Service';
 import { HttpEndPoints } from '../Settings/HttpEndPoints';
 import { LoginModels } from '@App/Common/Models/Login.Models';
-import { Observable, tap } from 'rxjs';
+import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { StorageEnum, StorageService } from './Storage.Service';
 
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {
+	CurrentUserSub: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+
 	private TenantBaseUrl = 'https://dev-i4yy6aosmfbqnxq3.us.auth0.com/';
 	private State!: string;
 
@@ -112,13 +114,14 @@ export class AuthenticationService {
 		this.StorageService.SetLocalStorage(StorageEnum.AccessToken, response.AccessToken);
 		this.StorageService.SetLocalStorage(StorageEnum.RefreshToken, response.RefreshToken);
 		this.StorageService.SetLocalStorage(StorageEnum.CurrentUser, response.CurrentUser);
-
+		this.CurrentUserSub.next(true);
 	}
 
 	Logout() {
 		this.StorageService.RemoveLocalStorage(StorageEnum.AccessToken);
 		this.StorageService.RemoveLocalStorage(StorageEnum.RefreshToken);
 		this.StorageService.RemoveLocalStorage(StorageEnum.CurrentUser);
+		this.CurrentUserSub.next(false);
 	}
 
 	RefreshAccessToken(): any {

@@ -1,3 +1,4 @@
+import { LoginModels } from '@App/Common/Models/Login.Models';
 import { AuthenticationService } from '@App/Common/Services/Authentication.Service';
 import { RoutePaths } from '@App/Common/Settings/RoutePaths';
 import { Component, ElementRef, ViewChild } from '@angular/core';
@@ -15,7 +16,7 @@ export class Language {
 	imports: [RouterModule]
 })
 export class HeaderComponent {
-	CurrentUser: any
+	CurrentUser: LoginModels.CurrentUser | null;
 	@ViewChild('NavbarCollapse') NavbarCollapse!: ElementRef;
 	RoutePaths = RoutePaths
 
@@ -26,6 +27,13 @@ export class HeaderComponent {
 		protected AuthService: AuthenticationService,
 	) {
 		this.CurrentUser = this.AuthService.CurrentUser
+		this.AuthService.CurrentUserSub.subscribe((isExisting: boolean) => {
+			if (isExisting) {
+				this.CurrentUser = this.AuthService.CurrentUser
+			} else {
+				this.CurrentUser = null;
+			}
+		})
 	}
 
 	goToProfile() {
