@@ -25,6 +25,9 @@ export class AuthComponent implements OnInit {
 			let response: LoginModels.AutheticationResponse = queryParams;
 			this.AuthenticationService.HandleAuthentication(response).then(isAuthenticated => {
 				isAuthenticated ? this.OnLoginSuccess() : this.OnLoginFailure();
+			}).catch(err => {
+				alert('error while logging you in');
+				this.Router.navigateByUrl(RoutePaths.Login);
 			});
 
 		});
@@ -41,7 +44,7 @@ export class AuthComponent implements OnInit {
 
 	NavigateTo() {
 		let returnUrl = this.AuthenticationService.ReturnUrl
-		const route = !!returnUrl ? returnUrl : RoutePaths.Default;
+		const route = !!returnUrl ? returnUrl : RoutePaths.TodoList;
 		this.Router.navigateByUrl(route);
 	}
 }

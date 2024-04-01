@@ -64,7 +64,7 @@ export class AuthenticationService {
 		// https://medium.com/@desinaoluseun/using-env-to-store-environment-variables-in-angular-20c15c7c0e6a
 		let response_type = 'code';
 		let client_id = '7AtMgepqMwqvlgtKhV2vQy7YmWYCr3oI';
-		let scope = 'openid profile email';
+		let scope = 'openid profile email offline_access ';
 		let redirect_uri = 'http://localhost:4200/auth';
 		let state = 'STATE';
 
