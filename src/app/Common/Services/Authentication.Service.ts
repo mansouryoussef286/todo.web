@@ -7,7 +7,7 @@ import { StorageEnum, StorageService } from './Storage.Service';
 
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {
-	CurrentUserSub: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+	CurrentUserSub: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
 
 	private TenantBaseUrl = 'https://dev-i4yy6aosmfbqnxq3.us.auth0.com/';
 	private State!: string;

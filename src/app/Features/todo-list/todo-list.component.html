@@ -6,7 +6,7 @@
 		</div>
 		<div *ngIf="IsLoaded">
 			<app-task-item *ngFor="let item of todoList" [TaskItem]="item"></app-task-item>
-			<div *ngIf="!IsAdded">
+			<div *ngIf="!IsAdded" class="text-center">
 				<app-loader></app-loader>
 			</div>
 		</div>

@@ -16,7 +16,7 @@ export class Language {
 	imports: [RouterModule]
 })
 export class HeaderComponent {
-	CurrentUser: LoginModels.CurrentUser | null;
+	CurrentUser!: LoginModels.CurrentUser | null;
 	@ViewChild('NavbarCollapse') NavbarCollapse!: ElementRef;
 	RoutePaths = RoutePaths
 
@@ -25,11 +25,13 @@ export class HeaderComponent {
 	constructor(
 		private Router: Router,
 		protected AuthService: AuthenticationService,
-	) {
-		this.CurrentUser = this.AuthService.CurrentUser
+	) { }
+
+	ngOnInit(): void {
+		this.CurrentUser = this.AuthService.CurrentUser;
 		this.AuthService.CurrentUserSub.subscribe((isExisting: boolean) => {
 			if (isExisting) {
-				this.CurrentUser = this.AuthService.CurrentUser
+				this.CurrentUser = this.AuthService.CurrentUser;
 			} else {
 				this.CurrentUser = null;
 			}
