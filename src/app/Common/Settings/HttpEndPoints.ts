@@ -9,5 +9,6 @@ export class HttpEndPoints {
 	public static Tasks = {
 		GetAll: 'todotasks/list',
 		Create: 'todotasks',
+		ToggleStatus: 'todotasks/{id}/toggle-status',
 	}
 }

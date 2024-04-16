@@ -17,6 +17,7 @@ import { AuthenticationService } from '@App/Common/Services/Authentication.Servi
 })
 export class TodoListComponent implements OnInit {
 	todoList!: TaskItem.Model[];
+	filteredTodoList!: TaskItem.Model[];
 	newItem: TaskItem.Model = new TaskItem.Model();
 	IsLoaded: boolean = false;
 	IsAdded: boolean = true;
@@ -32,7 +33,12 @@ export class TodoListComponent implements OnInit {
 		this.HttpService.Get<TaskItem.Model[]>(endPoint).subscribe(data => {
 			this.IsLoaded = true;
 			this.todoList = data;
+			this.filterTasks();
 		});
+	}
+
+	filterTasks() {
+		this.filteredTodoList = this.todoList.filter(t => t.Status == TaskItem.Status.NotCompleted);
 	}
 
 	addItem() {

@@ -3,7 +3,7 @@ export namespace TaskItem {
         Id!: number;
         Title!: string;
         Description!: string;
-        Status!: boolean;
+        Status!: number;
         CreatedAt!: Date;
         UpdatedAt!: Date;
     }
@@ -12,5 +12,10 @@ export namespace TaskItem {
         UserId!: number;
         Title!: string;
         Description!: string;
+    }
+
+    export enum Status {
+        NotCompleted = 0,
+        Completed = 1
     }
 }
