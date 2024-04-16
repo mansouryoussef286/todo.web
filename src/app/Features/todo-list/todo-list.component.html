@@ -1,5 +1,8 @@
 <div class="todo-list page-section">
-	<h1>Todo List</h1>
+	<div class="title">
+		<h1>Todo List</h1>
+		<button (click)="ToggleShowAll()" class="btn btn-primary show-all">{{ ShowAll ? 'hide completed' : 'Show completed' }}</button>
+	</div>
 	<div class="tasks-content">
 		<div *ngIf="!IsLoaded" class="d-flex justify-content-center">
 			<app-loader></app-loader>

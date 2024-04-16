@@ -1,6 +1,22 @@
 .todo-list {
 	flex-direction: column;
 
+	.title {
+		text-align: center;
+		position: relative;
+		width: 100%;
+		h1 {
+			display: inline-block;
+		}
+		.show-all {
+			position: absolute;
+			right: 5px;
+			top: 50%;
+			font-size: 12px;
+			transform: translateY(-50%);
+		}
+	}
+
 	.tasks-content {
 		padding: 20px;
 		width: 100%;

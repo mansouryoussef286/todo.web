@@ -1,5 +1,6 @@
 import { TaskItem } from '@App/Common/Models/TaskItem.Model';
 import { HttpService } from '@App/Common/Services/Http.Service';
+import { TaskItemsService } from '@App/Common/Services/TaskItems.Service';
 import { HttpEndPoints } from '@App/Common/Settings/HttpEndPoints';
 import { Component, Input } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -20,25 +21,16 @@ export class TaskItemComponent {
 	faTrash = faTrashAlt;
 
 	constructor(
-		private HttpService: HttpService
+		private HttpService: HttpService,
+		private TaskItemsService: TaskItemsService
 	) {
 	}
 
 	ToggleItemStatus() {
-		let endPoint = HttpEndPoints.Tasks.ToggleStatus;
-		endPoint = endPoint.replace('{id}', this.item.Id.toString());
-		this.HttpService.Put<any, boolean>(endPoint, '').subscribe(isToggled => {
-			if (isToggled) {
-				// hide it and add linethrough and so on
-			}
-		});
+		this.TaskItemsService.ToggleItemStatus(this.item.Id);
 	}
 
 	Delete() {
-		let endPoint = HttpEndPoints.Tasks.Delete;
-		endPoint = endPoint.replace('{id}', this.item.Id.toString());
-		this.HttpService.Delete(endPoint).subscribe(isToggled => {
-
-		});
+		this.TaskItemsService.Delete(this.item.Id);
 	}
 }

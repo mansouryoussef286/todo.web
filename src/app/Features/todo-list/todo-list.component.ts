@@ -9,6 +9,7 @@ import { LoaderComponent } from '@App/Common/Widgets/Loader/Loader';
 import { AuthenticationService } from '@App/Common/Services/Authentication.Service';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import { TaskItemsService } from '@App/Common/Services/TaskItems.Service';
 
 @Component({
 	selector: 'app-todo-list',
@@ -18,33 +19,37 @@ import { faPlus } from '@fortawesome/free-solid-svg-icons';
 	styleUrl: './todo-list.component.scss'
 })
 export class TodoListComponent implements OnInit {
-	todoList!: TaskItem.Model[];
 	filteredTodoList!: TaskItem.Model[];
 	newItem: TaskItem.Model = new TaskItem.Model();
+
 	IsLoaded: boolean = false;
 	IsAdded: boolean = true;
+	ShowAll!: boolean;
+
 	faPlus = faPlus;
 
-	constructor(private HttpService: HttpService, private AuthenticationService: AuthenticationService) { }
+	constructor(
+		private HttpService: HttpService,
+		private AuthenticationService: AuthenticationService,
+		private TaskItemsService: TaskItemsService,
+	) { }
 
 	ngOnInit(): void {
 		this.GetTasks();
 	}
 
-	GetTasks() {
-		let endPoint = HttpEndPoints.Tasks.GetAll;
-		this.HttpService.Get<TaskItem.Model[]>(endPoint).subscribe(data => {
-			this.IsLoaded = true;
-			this.todoList = data;
-			this.filterTasks();
+	async GetTasks() {
+		this.TaskItemsService.filteredTodoList$.subscribe(list => {
+			this.filteredTodoList = list;
 		});
+		this.TaskItemsService.showAll$.subscribe(show => {
+			this.ShowAll = show;
+		});
+		await this.TaskItemsService.GetTasks();
+		this.IsLoaded = true;
 	}
 
-	filterTasks() {
-		this.filteredTodoList = this.todoList.filter(t => t.Status == TaskItem.Status.NotCompleted);
-	}
-
-	addItem() {
+	async addItem() {
 		if (this.newItem.Title.trim() === '') return;
 		this.IsAdded = false;
 
@@ -54,12 +59,13 @@ export class TodoListComponent implements OnInit {
 			UserId: this.AuthenticationService.CurrentUser.Id
 		} as TaskItem.ReqModel;
 
-		let endPoint = HttpEndPoints.Tasks.Create;
-		this.HttpService.Post<TaskItem.ReqModel, TaskItem.Model>(endPoint, newItem).subscribe(data => {
-			this.IsAdded = true;
-			this.todoList.push(data);
-			this.newItem = new TaskItem.Model();
-			this.filterTasks();
-		});
+		await this.TaskItemsService.addItem(newItem);
+
+		this.newItem = new TaskItem.Model();
+		this.IsAdded = true;
+	}
+
+	ToggleShowAll() {
+		this.TaskItemsService.ToggleShowAll();
 	}
 }
