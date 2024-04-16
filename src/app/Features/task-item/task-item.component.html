@@ -5,13 +5,13 @@
 		<p class="item-description">{{ item.Description }}</p>
 	</label>
 	<div class="actions">
-		<button (click)="ToggleItemStatus()">
-			OK
-			<i class="fa fa-check" aria-hidden="true"></i>
+		<button (click)="ToggleItemStatus()" class="btn btn-outline-success">
+			<fa-icon [icon]="faCheck"></fa-icon>
+			<!-- <i class="fa fa-check" aria-hidden="true"></i> -->
 		</button>
-		<button>
-			NO
-			<i class="fa fa-trash-o" aria-hidden="true"></i>
+		<button class="btn btn-outline-danger">
+			<fa-icon [icon]="faTrash"></fa-icon>
+			<!-- <i class="fa fa-trash-o" aria-hidden="true"></i> -->
 		</button>
 	</div>
 </div>

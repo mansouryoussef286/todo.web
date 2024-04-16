@@ -7,6 +7,7 @@ import { routes } from './app.routes';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { HeaderComponent } from '@App/Features/Header/Header';
 import { AuthInterceptor } from '@App/Common/Interceptors/Auth.Interceptor';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
 	declarations: [AppComponent],
@@ -15,7 +16,8 @@ import { AuthInterceptor } from '@App/Common/Interceptors/Auth.Interceptor';
 		CommonModule,
 		RouterModule.forRoot(routes),
 		HttpClientModule,
-		HeaderComponent
+		HeaderComponent,
+		FontAwesomeModule
 	],
 	bootstrap: [AppComponent],
 	providers: [

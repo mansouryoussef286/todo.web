@@ -20,8 +20,16 @@
 		display: flex;
 		justify-items: center;
 		align-items: center;
+		align-self: center;
+
 		opacity: 0;
 		transition: all 0.3s ease-in-out;
+
+		button {
+			margin-inline-start: 5px;
+			padding: 5px;
+			border: none;
+		}
 	}
 
 	&:hover {
