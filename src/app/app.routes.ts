@@ -5,7 +5,7 @@ import { AuthComponent } from '@App/Features/login/auth/auth.component';
 import { HomeComponent } from '@App/Features/home/home.component';
 
 export const routes: Routes = [
-    { path: '', redirectTo: 'home', pathMatch: 'full' },
+    { path: '', redirectTo: 'todolist', pathMatch: 'full' },
     { path: 'login', component: LoginComponent },
     { path: 'auth', component: AuthComponent },
     { path: 'home', component: HomeComponent },

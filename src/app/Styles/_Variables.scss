@@ -4,27 +4,19 @@
 	--primary-bg-color: #fff;
 	--primary-color1: #3b76b5;
 	--primary-color2: #4e9bee;
-	--primary-color3: rgba(207, 216, 217, 1);
 	--primary-font-color: black;
+	--secondary-font-color: grey;
 	--header-height: 56px;
-	--page-inner-content-padding: 20px;
-	--page-inner-sm-content-padding: 100px;
-	--carousel-width: 500px;
-	--carousel-sm-width: 300px;
-	--background-horizontal-gradient-180: linear-gradient(
-		180deg,
-		var(--primary-font-color) 0%,
-		var(--primary-color3) 100%
-	);
-	--background-horizontal-gradient-0: linear-gradient(
-		0deg,
-		var(--primary-font-color) 0%,
-		var(--primary-color3) 100%
-	);
-	--box-shadow-offer-card: 0px 0px 10px 5px rgba(117, 117, 117, 0.71);
-	--box-shadow-course-card: 0px 0px 5px 1px rgba(117, 117, 117, 0.5);
-	// --animation-time: 2s;
-	.dark {
+	--box-shadow-color: rgba(0, 0, 0, 0.4);
+	--input-bg-color: #fff;
+
+	.dark-mode {
+		--primary-bg-color: black;
+		--primary-color1: #68abf3;
+		--primary-color2: #c0dfff;
 		--primary-font-color: white;
+		--secondary-font-color: rgb(213, 213, 213);
+		--box-shadow-color: rgba(255, 255, 255, 0.4);
+		--input-bg-color: #323232;
 	}
 }

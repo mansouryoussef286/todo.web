@@ -1,0 +1,58 @@
+.auth {
+	justify-content: center !important;
+}
+
+.loader {
+	width: 32px;
+	height: 22px;
+	position: relative;
+	border: 2px solid var(--primary-font-color);
+	border-radius: 8px;
+}
+.loader::before {
+	content: '';
+	position: absolute;
+	border: 2px solid var(--primary-font-color);
+	width: 16px;
+	height: 14px;
+	border-radius: 50% 50% 0 0;
+	left: 50%;
+	top: 0;
+	transform: translate(-50%, -100%);
+}
+.loader::after {
+	content: '';
+	position: absolute;
+	transform: translate(-50%, -50%);
+	left: 50%;
+	top: 50%;
+	width: 4px;
+	height: 4px;
+	border-radius: 50%;
+	background-color: var(--primary-font-color);
+	box-shadow:
+		8px 0 var(--primary-font-color),
+		-8px 0 var(--primary-font-color);
+	animation: flash 0.5s ease-out infinite alternate;
+}
+
+@keyframes flash {
+	0% {
+		background-color: rgba(255, 255, 255, 0.25);
+		box-shadow:
+			8px 0 rgba(255, 255, 255, 0.25),
+			-8px 0 rgba(255, 255, 255, 1);
+	}
+	50% {
+		background-color: rgba(255, 255, 255, 1);
+		box-shadow:
+			8px 0 rgba(255, 255, 255, 0.25),
+			-8px 0 rgba(255, 255, 255, 0.25);
+	}
+	100% {
+		background-color: rgba(255, 255, 255, 0.25);
+		box-shadow:
+			8px 0 rgba(255, 255, 255, 1),
+			-8px 0 rgba(255, 255, 255, 0.25);
+	}
+}

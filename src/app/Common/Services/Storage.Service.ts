@@ -5,6 +5,7 @@ export enum StorageEnum {
 	RefreshToken = 'RefreshToken',
 	CurrentUser = 'CurrentUser',
 	ReturnUrl = 'ReturnUrl',
+	IsDarkMode = 'IsDarkMode',
 }
 
 @Injectable({ providedIn: 'root' })

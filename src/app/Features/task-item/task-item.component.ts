@@ -22,7 +22,6 @@ export class TaskItemComponent {
 	constructor(
 		private HttpService: HttpService
 	) {
-		console.log(this.item);
 	}
 
 	ToggleItemStatus() {

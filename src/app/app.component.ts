@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { RoutePaths } from './Common/Settings/RoutePaths';
+import { DarkModeService } from './Common/Services/DarkMode.Service';
 
 @Component({
 	selector: 'app-root',
@@ -10,7 +11,16 @@ import { RoutePaths } from './Common/Settings/RoutePaths';
 
 export class AppComponent {
 	title = 'Todo';
-	constructor(protected Router: Router) { }
+	isDarkMode!: boolean;
+
+	constructor(
+		protected Router: Router,
+		protected DarkModeService: DarkModeService
+	) {
+		this.DarkModeService.isDarkMode$.subscribe((isDarkMode: boolean) => {
+			this.isDarkMode = isDarkMode;
+		})
+	}
 
 	GoToLogin() {
 		this.Router.navigateByUrl(RoutePaths.Login)

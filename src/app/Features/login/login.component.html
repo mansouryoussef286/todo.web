@@ -1,3 +1,7 @@
-<p>login works!</p>
-<button class="btn btn-secondary" (click)="authenticate()">login</button>
-<button class="btn btn-secondary ms-3" (click)="logout()">logout</button>
+<div class="account page-section">
+	<h1>Account</h1>
+	<div class="contentt">
+		<button *ngIf="!IsAuthenticated" class="btn btn-primary" (click)="authenticate()">login</button>
+		<button *ngIf="IsAuthenticated" class="btn btn-primary" (click)="logout()">logout</button>
+	</div>
+</div>

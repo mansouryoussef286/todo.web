@@ -23,7 +23,7 @@
 			position: absolute;
 			top: 5px;
 
-			box-shadow: 0px -10px 10px -10px rgba(0, 0, 0, 0.75);
+			box-shadow: 0px -10px 10px -6px var(--box-shadow-color);
 			width: 120%;
 			height: 25px;
 		}
@@ -32,13 +32,24 @@
 			width: 100%;
 			input {
 				margin-bottom: 10px;
+				background-color: var(--input-bg-color);
+				color: var(--primary-font-color);
+				&::placeholder {
+					color: var(--primary-font-color);
+					opacity: 0.8;
+				}
 			}
 			textarea {
 				height: 30px;
 				min-height: 10px;
 				font-size: 12px;
 				padding: 5px 15px;
-				color: grey;
+				color: var(--secondary-font-color);
+				background-color: var(--input-bg-color);
+				&::placeholder {
+					color: var(--secondary-font-color);
+					opacity: 0.8;
+				}
 			}
 		}
 		button {

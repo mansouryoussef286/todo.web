@@ -7,11 +7,13 @@ import { HttpService } from '@App/Common/Services/Http.Service';
 import { HttpEndPoints } from '@App/Common/Settings/HttpEndPoints';
 import { LoaderComponent } from '@App/Common/Widgets/Loader/Loader';
 import { AuthenticationService } from '@App/Common/Services/Authentication.Service';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
 	selector: 'app-todo-list',
 	standalone: true,
-	imports: [FormsModule, CommonModule, TaskItemComponent, LoaderComponent],
+	imports: [FormsModule, CommonModule, TaskItemComponent, LoaderComponent, FontAwesomeModule],
 	templateUrl: './todo-list.component.html',
 	styleUrl: './todo-list.component.scss'
 })
@@ -21,6 +23,7 @@ export class TodoListComponent implements OnInit {
 	newItem: TaskItem.Model = new TaskItem.Model();
 	IsLoaded: boolean = false;
 	IsAdded: boolean = true;
+	faPlus = faPlus;
 
 	constructor(private HttpService: HttpService, private AuthenticationService: AuthenticationService) { }
 
