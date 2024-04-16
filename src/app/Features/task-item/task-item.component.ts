@@ -33,4 +33,12 @@ export class TaskItemComponent {
 			}
 		});
 	}
+
+	Delete() {
+		let endPoint = HttpEndPoints.Tasks.Delete;
+		endPoint = endPoint.replace('{id}', this.item.Id.toString());
+		this.HttpService.Delete(endPoint).subscribe(isToggled => {
+
+		});
+	}
 }

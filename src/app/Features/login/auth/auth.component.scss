@@ -38,21 +38,21 @@
 
 @keyframes flash {
 	0% {
-		background-color: rgba(255, 255, 255, 0.25);
+		background-color: var(--secondary-font-color);
 		box-shadow:
-			8px 0 rgba(255, 255, 255, 0.25),
-			-8px 0 rgba(255, 255, 255, 1);
+			8px 0 var(--secondary-font-color),
+			-8px 0 var(--primary-font-color);
 	}
 	50% {
-		background-color: rgba(255, 255, 255, 1);
+		background-color: var(--primary-font-color);
 		box-shadow:
-			8px 0 rgba(255, 255, 255, 0.25),
-			-8px 0 rgba(255, 255, 255, 0.25);
+			8px 0 var(--secondary-font-color),
+			-8px 0 var(--secondary-font-color);
 	}
 	100% {
-		background-color: rgba(255, 255, 255, 0.25);
+		background-color: var(--secondary-font-color);
 		box-shadow:
-			8px 0 rgba(255, 255, 255, 1),
-			-8px 0 rgba(255, 255, 255, 0.25);
+			8px 0 var(--primary-font-color),
+			-8px 0 var(--secondary-font-color);
 	}
 }

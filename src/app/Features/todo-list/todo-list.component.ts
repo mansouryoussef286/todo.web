@@ -59,6 +59,7 @@ export class TodoListComponent implements OnInit {
 			this.IsAdded = true;
 			this.todoList.push(data);
 			this.newItem = new TaskItem.Model();
+			this.filterTasks();
 		});
 	}
 }

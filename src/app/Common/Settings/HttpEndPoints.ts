@@ -10,5 +10,6 @@ export class HttpEndPoints {
 		GetAll: 'todotasks/list',
 		Create: 'todotasks',
 		ToggleStatus: 'todotasks/{id}/toggle-status',
+		Delete: 'todotasks/{id}',
 	}
 }
