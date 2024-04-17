@@ -21,7 +21,15 @@ export class TaskItemsService {
 		if (!this.showAll)
 			this.filteredTodoList = this.todoList.filter(t => t.Status == TaskItem.Status.NotCompleted);
 		else
-			this.filteredTodoList = this.todoList;
+			this.filteredTodoList = this.todoList.sort((a, b) => {
+				// Sort by Status first
+				if (a.Status === b.Status) {
+					// If Status is the same, sort by id
+					return a.Id - b.Id;
+				}
+				// Elements with Status 0 should appear first
+				return a.Status - b.Status;
+			});
 	}
 
 	private PublishTasks() {
@@ -47,11 +55,12 @@ export class TaskItemsService {
 	async ToggleItemStatus(id: number) {
 		let endPoint = HttpEndPoints.Tasks.ToggleStatus;
 		endPoint = endPoint.replace('{id}', id.toString());
+		// const oldStatus = 
+		const item = this.todoList.find(item => item.Id == id)!;
 		const isToggled = await firstValueFrom(this.HttpService.Put<any, boolean>(endPoint, ''));
 		if (isToggled) {
 			// hide it and add linethrough and so on
-			const item = this.todoList.find(item => item.Id == id)!;
-			item.Status = TaskItem.Status.Completed;
+			item.Status = item.Status == TaskItem.Status.NotCompleted ? TaskItem.Status.Completed : TaskItem.Status.NotCompleted;
 		}
 		this.filterTasks();
 		this.PublishTasks();

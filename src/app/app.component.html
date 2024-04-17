@@ -1,3 +1,4 @@
+<app-preloader *ngIf="!NoLoader" [Loaded]="IsLoaded"></app-preloader>
 <main class="min-vh-100 inner-container" [ngClass]="{ 'dark-mode': isDarkMode }">
 	<div class="page-master">
 		<app-header></app-header>

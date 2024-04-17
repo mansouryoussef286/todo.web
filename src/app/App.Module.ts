@@ -8,6 +8,7 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { HeaderComponent } from '@App/Features/Header/Header';
 import { AuthInterceptor } from '@App/Common/Interceptors/Auth.Interceptor';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { PreLoaderComponent } from './Common/Widgets/PreLoader/PreLoader';
 
 @NgModule({
 	declarations: [AppComponent],
@@ -17,7 +18,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 		RouterModule.forRoot(routes),
 		HttpClientModule,
 		HeaderComponent,
-		FontAwesomeModule
+		FontAwesomeModule,
+		PreLoaderComponent
 	],
 	bootstrap: [AppComponent],
 	providers: [
